@@ -15,7 +15,7 @@
 <body>
   <header>
     <nav class="menu">
-      <ul>
+      <ul class="container">
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#portfolio">Projetos</a></li>
         <li><a href="#contato">Contato</a></li>
@@ -28,17 +28,54 @@
     </div>
   </header>
 
-  <section class="portfolio" id="portfolio">
+  <section class="sobre container">
+    <h2>Sobre</h2>
+
+    <figure class="avatar">
+      <img src="https://avatarfiles.alphacoders.com/100/100644.jpg" alt="Caique">
+    </figure>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, nisi perferendis. Quo nostrum pariatur quia
+      fugit. Eveniet pariatur repellat magnam incidunt tenetur reprehenderit, ratione architecto totam culpa soluta
+      dolor natus.</p>
+    <p>Esse, possimus aliquid debitis est ab quidem. Adipisci enim sequi odio ipsum tempora facilis iusto voluptates
+      iste fuga impedit dignissimos, vitae repudiandae possimus harum quibusdam repellat ratione ducimus expedita illo?
+    </p>
+    <p>Consectetur maiores necessitatibus voluptatibus quos reiciendis perspiciatis cupiditate architecto eaque odit
+      perferendis repellat in reprehenderit commodi qui amet tempore quo ab deleniti aut, impedit natus molestiae.
+      Consectetur quas sequi minus.</p>
+    <p>Beatae aperiam officiis dolores libero accusamus. Eius magnam porro explicabo eaque non repudiandae debitis autem
+      quas quo ex rerum ut a distinctio obcaecati totam laborum, commodi, voluptatum voluptate aperiam aliquam!</p>
+  </section>
+
+  <section class="portfolio container" id="portfolio">
     <h2>Projetos</h2>
     <div class="grid">
-      <figure>
-        <img class="img-portfolio" src="./img/alura.png" alt="Alura">
-        <figcaption>Alura</figcaption>
-      </figure>
-      <figure>
-        <img class="img-portfolio" src="./img/caelum.png" alt="Caelum">
-        <figcaption>Caelum</figcaption>
-      </figure>
+
+      <div class="flip-card">
+        <div class="card">
+          <figure class="card-front">
+            <img class="img-portfolio" src="./img/alura.png" alt="Alura">
+            <figcaption>Alura</figcaption>
+          </figure>
+          <div class="card-back">
+            Oi, eu sou a parte de trás do Alura! :)
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card">
+        <div class="card">
+          <figure class="card-front">
+            <img class="img-portfolio" src="./img/caelum.png" alt="Caelum">
+            <figcaption>Caelum</figcaption>
+          </figure>
+          <div class="card-back">
+            Parte de trás Caelum
+          </div>
+        </div>
+      </div>
+
       <figure>
         <img class="img-portfolio" src="./img/hispters.png" alt="Hispters">
         <figcaption>Hispters</figcaption>
@@ -53,7 +90,7 @@
       </figure>
     </div>
   </section>
-  <section class="contato" id="contato">
+  <section class="contato container" id="contato">
     <h2>Contato</h2>
     <div class="grid icons">
       <a target="_blank" href="https://github.com/vanessametonini">
