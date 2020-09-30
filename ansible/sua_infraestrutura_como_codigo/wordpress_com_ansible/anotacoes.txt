@@ -1,0 +1,56 @@
+Comando para executar o Ansible no grupo "wordpress" (criado no hosts):
+
+    ansible -vvvv wordpress -u vagrant --private-key .vagrant/machines/wordpress/virtualbox/private_key -i hosts -m shell -a 'echo Hello, World'
+
+Comando para executar um playbook do Ansible:
+
+    ansible-playbook provisioning.yml -u vagrant -i hosts --private-key .vagrant/machines/wordpress/virtualbox/private_key
+
+
+Diminuindo o código do playbook usando with_items:
+
+De:
+
+---
+- hosts: all
+  tasks:
+    - name: 'Instala o PHP5'
+      apt:
+        name: php5
+        state: latest
+      become: yes
+    - name: 'Instala o Apache2'
+      apt:
+        name: apache2
+        state: latest
+      become: yes
+    - name: 'Instala o libapache2 para comunicação entre PHP e Apache'
+      apt:
+        name: libapache2-mod-php5
+        state: latest
+      become: yes
+
+Para:
+
+---
+- hosts: all
+  tasks:
+    - name: 'Instala dependências do sistema operacional'
+      apt:
+        name: '{{ item }}'
+        state: latest
+      become: yes
+      with_items:
+        - php5
+        - apache2
+        - libapache2-mod-php5
+
+Esta solução usando o with_items está deprecated, e é recomendado usar da seguinte forma:
+
+[DEPRECATION WARNING]: Invoking "apt" only once while using a loop via squash_actions is deprecated. Instead of using a loop to supply multiple items
+ and specifying `name: "{{ item }}"`, please use `name: ['php5', 'apache2', 'libapache2-mod-php5']` and remove the loop. This feature will be removed
+ in version 2.11. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+
+
+É possível passar o usuário e a chave privada no arquivo hosts, assim diminuindo o comando no cmd e possibilitando usar usuários e chaves privadas diferentes para máquinas diferentes:
+    ansible-playbook provisioning.yml -i hosts
