@@ -33,7 +33,7 @@ e2e/*.map
 .DS_Store/
 
 ### Clojure ###
-pom.xml
+#pom.xml
 pom.xml.asc
 *.jar
 *.class
