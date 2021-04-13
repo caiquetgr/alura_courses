@@ -1,0 +1,11 @@
+kubectl get deployments
+
+kubectl rollout history deployment <deployment-name>
+
+kubectl apply -f <deployment.file> --record
+
+# Alter change cause:
+kubectl annotate deployment <deployment-name> kubernetes.io/change-cause=<description>
+
+# change to another revision
+kubectl rollout undo deployment <deployment-name> --to-revision=<revision-number>
