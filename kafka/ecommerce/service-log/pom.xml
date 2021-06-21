@@ -11,7 +11,6 @@
 
     <artifactId>service-log</artifactId>
     <dependencies>
-
         <dependency>
             <groupId>br.com.alura</groupId>
             <artifactId>common-kafka</artifactId>
