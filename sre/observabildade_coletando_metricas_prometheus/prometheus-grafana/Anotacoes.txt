@@ -1,0 +1,65 @@
+Todas as métricas tem 3 atributos:
+
+- Metric name
+- Labels
+- Sample (resultado da consulta)
+
+logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="debug"} = 0
+    ^ metric name       ^ label                     ^ label                         ^ label             ^ label        ^ sample
+
+
+Explicação dos tipos de dados do Prometheus:
+https://prometheus.io/docs/prometheus/latest/querying/basics/
+
+Quando consultamos logback_events_total e retorna várias linhas diferenciando apenas o level, foi retornado um Instant Vector, com cada linha sendo um índice desse vetor. Cada linha é uma série temporal.
+
+Exemplo de retorno:
+logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="debug"} = 0
+logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="error"} = 0
+logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="info"} = 28
+logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="trace"} = 0
+logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="warn"} = 2
+
+
+Para ter um range vector da métrica, basta utilizar [] com o tempo requerido. Será retornado a linha com o valor sendo os últimos scrapes (consultas do prometheus) 
+
+
+Query:
+    logback_events_total[1m]  (último minuto)
+Resultado:
+    logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="debug"}
+        0 @1676417083.446
+        0 @1676417088.447
+        0 @1676417093.447
+        0 @1676417098.445
+        0 @1676417103.451
+        0 @1676417108.446
+        0 @1676417113.445
+        0 @1676417118.448
+        0 @1676417123.456
+        0 @1676417128.445
+        0 @1676417133.449
+        0 @1676417138.448
+
+Query:
+    logback_events_total[2m:30s] (olhar a cada 30 segundos nos últimos 2 minutos)
+Resultado:
+    logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="info"}
+    28 @1676417490
+    28 @1676417520
+    28 @1676417550
+    28 @1676417580
+
+
+Explicação sobre tipos de métricas:
+https://prometheus.io/docs/concepts/metric_types/
+
+
+
+Histogram Exemplo
+http_server_requests_seconds_bucket{application="app-forum-api",status="200",uri="/topicos/{id}",le="0.05",}  (le 0.05 = menor ou igual a 50ms)
+
+
+Exemplo de seletor:
+http_server_requests_seconds_count{application="app-forum-api", method=~"GET|POST", status!~"2..|3..", uri!="/actuator/prometheus", uri!="/actuator/health"}
+http_server_requests_seconds_count{application="app-forum-api", method=~"GET|POST", status=~"2..|3..", uri!="/actuator/prometheus", uri!="/actuator/health"} offset 1m
