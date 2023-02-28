@@ -63,3 +63,15 @@ http_server_requests_seconds_bucket{application="app-forum-api",status="200",uri
 Exemplo de seletor:
 http_server_requests_seconds_count{application="app-forum-api", method=~"GET|POST", status!~"2..|3..", uri!="/actuator/prometheus", uri!="/actuator/health"}
 http_server_requests_seconds_count{application="app-forum-api", method=~"GET|POST", status=~"2..|3..", uri!="/actuator/prometheus", uri!="/actuator/health"} offset 1m
+
+
+
+4 Golden Signals
+Latencia
+Trafego
+Saturação
+Erros
+
+Metodologias USE e RED
+USE: Utilização, Saturação e Erros
+RED: Rate, Erros e Duração
