@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CursoApplication {
 
-	private static Logger logger = LoggerFactory.getLogger(CursoApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(CursoApplication.class);
 
 	public static void main(String[] args) {
 		logger.info("Iniciando a API de cursos Alura");
